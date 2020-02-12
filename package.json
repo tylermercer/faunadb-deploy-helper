@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "fauna-deploy": "./bin/fauna-deploy.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tylermercer/faunadb-deploy-helper.git"
@@ -19,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/tylermercer/faunadb-deploy-helper/issues"
   },
-  "homepage": "https://github.com/tylermercer/faunadb-deploy-helper#readme"
+  "homepage": "https://github.com/tylermercer/faunadb-deploy-helper#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
