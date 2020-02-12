@@ -1,0 +1,23 @@
+{
+  "name": "faunadb-deploy-helper",
+  "version": "0.0.1",
+  "description": "A package to help with deploying a GQL schema and FQL functions to FaunaDB, intended for use in CD pipelines",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylermercer/faunadb-deploy-helper.git"
+  },
+  "keywords": [
+    "faunadb",
+    "ci/cd"
+  ],
+  "author": "Tyler Mercer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tylermercer/faunadb-deploy-helper/issues"
+  },
+  "homepage": "https://github.com/tylermercer/faunadb-deploy-helper#readme"
+}
