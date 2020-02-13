@@ -2,6 +2,11 @@
 
 This is a package to facilitate deploying a FaunaDB GraphQL schema from a Continuous Deployment pipeline.
 
+## Installation
+```
+npm install --save-dev faunadb-deploy-helper
+```
+
 ## Usage
 ```
 fauna-deploy my-db-name myschema.gql

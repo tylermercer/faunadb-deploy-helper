@@ -1,6 +1,7 @@
 const https = require('https');
+const fs = require('fs');
 
-function httpsPost({body, ...options}) {
+const httpsPost = ({body, ...options}) => {
     return new Promise((resolve,reject) => {
         const req = https.request({
             method: 'POST',
@@ -27,19 +28,10 @@ function httpsPost({body, ...options}) {
     })
 }
 
-/**
- * Deploys a GraphQL schema and/or runs FQL files
- *
- * @param {secret} String the Fauna DB's secret
- * @param {db} String the database name
- * @param {schema} String the path to the GraphQL schema to deploy
- * @param {queries} List<String> the paths of the fql files to run
- */
-const deploy = async function(secret, db, schema, override, queries) {
-  const fs = require('fs');
-  const schemaContents = fs.readFileSync(schema, 'utf8');
+const updateSchema = async (secret, schemaPath, override) => {
+  const schemaContents = fs.readFileSync(schemaPath, 'utf8');
 
-  console.log(override? "Updating schema..." : "Overriding schema...");
+  console.log(override? "Overriding schema..." : "Updating schema...");
 
   const res = await httpsPost({
     hostname: 'graphql.fauna.com',
@@ -51,13 +43,24 @@ const deploy = async function(secret, db, schema, override, queries) {
   });
 
   if (res.statusCode === 200) {
-    console.log("Schema update successfully!");
+    console.log("Schema updated successfully!");
   } else {
-    console.log(`Schema update failed: ${res.statusCode} ${res.body.toString}`);
+    console.log(`Schema update failed: ${res.statusCode} ${res.body.toString()}`);
     process.exit(3);
   }
+}
 
-  //TODO: run queries
+/**
+ * Deploys a GraphQL schema and/or runs FQL files
+ *
+ * @param {secret} String the Fauna DB's secret
+ * @param {db} String the database name
+ * @param {schema} String the path to the GraphQL schema to deploy
+ * @param {queries} List<String> the paths of the fql files to run
+ */
+const deploy = async function(secret, db, schema, override, queryFiles) {
+
+  await updateSchema(secret, schema, override);
 };
 
 // Allows us to call this function from outside of the library file.
