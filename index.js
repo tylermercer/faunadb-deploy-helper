@@ -28,8 +28,17 @@ const httpsPost = ({body, ...options}) => {
     })
 }
 
-const updateSchema = async (secret, schemaPath, override) => {
-  const schemaContents = fs.readFileSync(schemaPath, 'utf8');
+/**
+ * Deploys a GraphQL schema and/or runs FQL files
+ *
+ * @param {secret} String the Fauna DB's secret
+ * @param {db} String the database name
+ * @param {schema} String the path to the GraphQL schema to deploy
+ * @param {queries} List<String> the paths of the fql files to run
+ */
+const deploy = async function(secret, schema, override) {
+
+  const schemaContents = fs.readFileSync(schema, 'utf8');
 
   console.log(override? "Overriding schema..." : "Updating schema...");
 
@@ -48,19 +57,6 @@ const updateSchema = async (secret, schemaPath, override) => {
     console.log(`Schema update failed: ${res.statusCode} ${res.body.toString()}`);
     process.exit(3);
   }
-}
-
-/**
- * Deploys a GraphQL schema and/or runs FQL files
- *
- * @param {secret} String the Fauna DB's secret
- * @param {db} String the database name
- * @param {schema} String the path to the GraphQL schema to deploy
- * @param {queries} List<String> the paths of the fql files to run
- */
-const deploy = async function(secret, db, schema, override, queryFiles) {
-
-  await updateSchema(secret, schema, override);
 };
 
 // Allows us to call this function from outside of the library file.

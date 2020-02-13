@@ -3,7 +3,7 @@
 var lib = require('../index.js');
 
 var printUsage = function() {
-  console.log("Usage: fauna-deploy dbname [--override] path/to/schema [path/to/fqlfile1 ... path/to/fqlfile2]\n" +
+  console.log("Usage: fauna-deploy path/to/schema [--override] \n" +
     "Params in square brackets are optional. If --override is not used, schema is imported using merge mode.");
 }
 
@@ -28,14 +28,12 @@ for (var arg in args) {
   }
 }
 
-if (args.length < 2) {
+if (args.length !== 1) {
   printUsage();
   process.exit(1);
 }
 
-var db = args[0];
-var schema = args[1];
-var queries = [];
+var schema = args[0];
 
 // Displays the text in the console
-lib.deploy(process.env.FAUNA_SECRET, db, schema, override, queries);
+lib.deploy(process.env.FAUNA_SECRET, schema, override);
