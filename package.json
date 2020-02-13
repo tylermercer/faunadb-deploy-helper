@@ -1,6 +1,6 @@
 {
   "name": "faunadb-deploy-helper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A package to help with deploying a GQL schema to FaunaDB, intended for use in CD pipelines",
   "main": "index.js",
   "bin": {
