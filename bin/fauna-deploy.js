@@ -23,7 +23,7 @@ var override = false;
 for (var arg in args) {
   if (args[arg] === '--override' || args[arg] === '-o') {
     override = true;
-    args = args.splice(arg, 1);
+    args.splice(arg, 1);
     break;
   }
 }
